@@ -12,12 +12,10 @@ interface ErrorBoundaryState {
 
 // 1. إنشاء حاجز للأخطاء لمنع الشاشة البيضاء
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  public state: ErrorBoundaryState = { hasError: false };
-
-  // Removed redundant constructor to allow proper TS inference for props
-  // constructor(props: ErrorBoundaryProps) {
-  //   super(props);
-  // }
+  constructor(props: ErrorBoundaryProps) {
+    super(props);
+    this.state = { hasError: false };
+  }
 
   public static getDerivedStateFromError(_: Error): ErrorBoundaryState {
     return { hasError: true };

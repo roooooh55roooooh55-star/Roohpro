@@ -14,9 +14,17 @@ export default defineConfig({
     assetsDir: 'assets',
     sourcemap: false,
     minify: 'esbuild',
-    target: 'esnext'
+    target: 'esnext',
+    rollupOptions: {
+      // Ensure firebase is not treated as external to prevent resolution errors
+      external: [],
+    }
   },
   server: {
     historyApiFallback: true,
-  }
+  },
+  optimizeDeps: {
+    // Explicitly include firebase packages for Vite optimization
+    include: ['firebase/app', 'firebase/firestore'],
+  },
 });
